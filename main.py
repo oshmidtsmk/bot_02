@@ -11,7 +11,8 @@ import datetime # needed to convert time sting to datetime object needed for the
 import logging
 import sys
 
-MODE = os.getenv("MODE")
+#MODE = os.getenv("MODE")
+#MODE = "dev"
 TOKEN = "5113468715:AAEI6SJIZfh_MdkhSRKDMr2h7EYbKsEgBL4"
 ENTER_MESSAGE, ENTER_TIME = range(2)  #Two states of add reminder btn.
 ADD_REMINDER_TEXT = 'Add Reminder ⏰'
@@ -22,11 +23,11 @@ datasource = DataSource("postgres://bot_02_user:password@localhost:5432/bot_02")
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')# basic configuration of logger.
 logger = logging.getLogger()
 
-if MODE == "dev":
-    def run():
-        logger.info("Start in DEV mode")
-        updater.start_polling()
-elif MODE == "prod":
+# if MODE == "dev":
+#     def run():
+#         logger.info("Start in DEV mode")
+#         updater.start_polling()
+if MODE == "prod":
     def run():
         logger.info("Start in PROD mode")
         updater.start_webhook(listen="0.0.0.0", port=int(os.environ.get("PORT", "8443")), url_path=TOKEN,
