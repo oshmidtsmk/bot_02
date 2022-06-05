@@ -4,18 +4,37 @@ from telegram.ext import (Updater, CommandHandler, ConversationHandler, MessageH
                                                 Filters, CallbackContext)
 from telegram import KeyboardButton, ReplyKeyboardMarkup, Update
 from data_source import DataSource
+import os
 import threading
 import time
 import datetime # needed to convert time sting to datetime object needed for the db.
+import logging
+import sys
 
+MODE = os.getenv("MODE")
 TOKEN = "5113468715:AAEI6SJIZfh_MdkhSRKDMr2h7EYbKsEgBL4"
-
 ENTER_MESSAGE, ENTER_TIME = range(2)  #Two states of add reminder btn.
 ADD_REMINDER_TEXT = 'Add Reminder ⏰'
 INTERVAL = 30 # frequency of checking reminders.
 DATABASE_URL = "postgres://bot_02_user:password@localhost:5432/bot_02"
 
 datasource = DataSource("postgres://bot_02_user:password@localhost:5432/bot_02") # is needed to save entered message and data in the dict.
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')# basic configuration of logger.
+logger = logging.getLogger()
+
+if MODE == "dev":
+    def run():
+        logger.info("Start in DEV mode")
+        updater.start_polling()
+elif MODE == "prod":
+    def run():
+        logger.info("Start in PROD mode")
+        updater.start_webhook(listen="0.0.0.0", port=int(os.environ.get("PORT", "8443")), url_path=TOKEN,
+                              webhook_url="https://{}.herokuapp.com/{}".format(os.environ.get("APP_NAME"), TOKEN))
+else:
+    logger.error("No mode specified!")
+    sys.exit(1)
+
 
 def start_handler(update, context):  #(update:Update, context: CallbackContext) are available due to use_context = True for the updater.
 #CallbackContext contains user_data wich is the dict. For each update for the same user this dict willl be the same.
@@ -85,7 +104,7 @@ if __name__ == '__main__':
     )
     updater.dispatcher.add_handler(conv_handler)
     datasource.create_tables()
-    updater.start_polling()
+    run()
     start_reminders_task()
 
 
