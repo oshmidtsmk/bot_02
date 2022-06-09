@@ -11,7 +11,7 @@ import datetime # needed to convert time sting to datetime object needed for the
 import logging
 import sys
 
-#MODE = os.getenv("MODE")
+#MODE = os.getenv("MODE")!!
 MODE = "dev"
 TOKEN = "5113468715:AAEI6SJIZfh_MdkhSRKDMr2h7EYbKsEgBL4"
 ENTER_MESSAGE, ENTER_TIME = range(2)  #Two states of add reminder btn.
