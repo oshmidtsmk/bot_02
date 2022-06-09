@@ -20,7 +20,7 @@ INTERVAL = 30 # frequency of checking reminders.
 DATABASE_URL = "postgres://eehcracordzsii:4eb0ceaee3ca10"
 #"postgres://bot_02_user:password@localhost:5432/bot_02"
 
-datasource = DataSource("postgres://bot_02_user:password@localhost:5432/bot_02") # is needed to save entered message and data in the dict.
+datasource = DataSource(DATABASE_URL) # is needed to save entered message and data in the dict.
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')# basic configuration of logger.
 logger = logging.getLogger()
 
