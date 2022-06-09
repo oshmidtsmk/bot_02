@@ -17,7 +17,8 @@ TOKEN = "5113468715:AAEI6SJIZfh_MdkhSRKDMr2h7EYbKsEgBL4"
 ENTER_MESSAGE, ENTER_TIME = range(2)  #Two states of add reminder btn.
 ADD_REMINDER_TEXT = 'Add Reminder ⏰'
 INTERVAL = 30 # frequency of checking reminders.
-DATABASE_URL = "postgres://bot_02_user:password@localhost:5432/bot_02"
+DATABASE_URL = "postgres://eehcracordzsii:4eb0ceaee3ca10"
+#"postgres://bot_02_user:password@localhost:5432/bot_02"
 
 datasource = DataSource("postgres://bot_02_user:password@localhost:5432/bot_02") # is needed to save entered message and data in the dict.
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')# basic configuration of logger.
