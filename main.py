@@ -11,16 +11,18 @@ import datetime # needed to convert time sting to datetime object needed for the
 import logging
 import sys
 
-#MODE = os.getenv("MODE")!!
-MODE = "dev"
-TOKEN = "5113468715:AAEI6SJIZfh_MdkhSRKDMr2h7EYbKsEgBL4"
+#MODE = "dev"
+#TOKEN = "5113468715:AAEI6SJIZfh_MdkhSRKDMr2h7EYbKsEgBL4"
+MODE = os.getenv("MODE")
+TOKEN = os.getenv("TOKEN")
 ENTER_MESSAGE, ENTER_TIME = range(2)  #Two states of add reminder btn.
 ADD_REMINDER_TEXT = 'Add Reminder ⏰'
 INTERVAL = 30 # frequency of checking reminders.
-DATABASE_URL = "postgres://eehcracordzsii:4eb0ceaee3ca1072898ffee53b5d26163ed2f7f0fd6ff82dd7bb5300ff2f5d93@ec2-54-228-32-29.eu-west-1.compute.amazonaws.com:5432/d44hf4rj4drtg8"
+#DATABASE_URL = "postgres://eehcracordzsii:4eb0ceaee3ca1072898ffee53b5d26163ed2f7f0fd6ff82dd7bb5300ff2f5d93@ec2-54-228-32-29.eu-west-1.compute.amazonaws.com:5432/d44hf4rj4drtg8"
 #"postgres://bot_02_user:password@localhost:5432/bot_02"
 
-datasource = DataSource(DATABASE_URL) # is needed to save entered message and data in the dict.
+#datasource = DataSource(DATABASE_URL) # is needed to save entered message and data in the dict.
+dataSource = DataSource(os.environ.get("DATABASE_URL"))
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')# basic configuration of logger.
 logger = logging.getLogger()
 
